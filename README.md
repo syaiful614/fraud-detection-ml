@@ -1,7 +1,7 @@
 ﻿# Credit Card Fraud Detection: from notebook to a deployable service
 
-  [![CI](https://github.com/syaiful614/fraud-detection-ml/actions/workflows/ci.yml/badge.svg)](https://github.com/syaiful614/fraud-detection-ml/actions)
-  
+[![CI](https://github.com/syaiful614/fraud-detection-ml/actions/workflows/ci.yml/badge.svg)](https://github.com/syaiful614/fraud-detection-ml/actions)
+
 An end-to-end machine learning project on a real, extremely imbalanced dataset (0.17% fraud).
 It goes beyond "fit a model, print accuracy": the validation is time-aware and leakage-safe,
 the decision threshold is chosen by money rather than by 0.5, predictions are explainable, drift
@@ -170,6 +170,23 @@ Response for the example above (the values are illustrative, not a real customer
 Endpoints: `GET /health`, `GET /model-info`, `POST /predict`, `POST /predict/batch` (max 1,000).
 Docker: `make docker-build && make docker-run`.
 
+![API demo](docs/api_demo.png)
+
+### Windows (PowerShell)
+
+`make` is not available by default on Windows. Use a fresh virtual environment (avoid installing into a shared conda base environment) and call its Python directly, which also avoids PowerShell's script-execution policy:
+
+```powershell
+python -m venv .venv
+.\.venv\Scripts\python.exe -m pip install -e ".[dev]"
+.\.venv\Scripts\python.exe -m pytest -q
+.\.venv\Scripts\python.exe -m fraudlab download
+.\.venv\Scripts\python.exe -m fraudlab train
+.\.venv\Scripts\python.exe -m fraudlab serve
+```
+
+In PowerShell, `curl` is an alias for a different command, so test the API through the interactive docs at `http://127.0.0.1:8000/docs` instead of the curl example above.
+
 ## Project structure
 
 ```
@@ -203,8 +220,7 @@ models/             fraud_model.joblib + metadata.json (generated)
 * **Threshold tuned on out-of-fold scores of models trained on less data** than the final model;
   re-check it with monitoring after deployment.
 * Dataset age (2013) and geography limit generalisation to modern fraud patterns.
-* Tested locally with Python 3.12, scikit-learn 1.8, LightGBM 4.7, pandas 3.0, numpy 2.4. The CI
-  matrix covers Python 3.10–3.12 and the `pyproject.toml` lower bounds are conservative guesses.
+* Tested on Linux with Python 3.12 (scikit-learn 1.8, LightGBM 4.7, pandas 3.0, numpy 2.4) and on Windows with Python 3.13 (scikit-learn 1.9, pandas 3.1, numpy 2.5). The CI matrix covers Python 3.10–3.12 and the `pyproject.toml` lower bounds are conservative guesses.
 
 ## Roadmap
 
@@ -239,4 +255,3 @@ secara statistik. Fitur `V1`–`V28` anonim dan datanya hanya 48 jam, jadi proye
 `make serve`, lalu buka `http://127.0.0.1:8000/docs`.
 
 </details>
-
