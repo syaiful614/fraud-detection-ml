@@ -1,5 +1,7 @@
 ﻿# Credit Card Fraud Detection: from notebook to a deployable service
 
+  [![CI](https://github.com/syaiful614/fraud-detection-ml/actions/workflows/ci.yml/badge.svg)](https://github.com/syaiful614/fraud-detection-ml/actions)
+  
 An end-to-end machine learning project on a real, extremely imbalanced dataset (0.17% fraud).
 It goes beyond "fit a model, print accuracy": the validation is time-aware and leakage-safe,
 the decision threshold is chosen by money rather than by 0.5, predictions are explainable, drift
