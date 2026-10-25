@@ -1,0 +1,36 @@
+# Full experiment configuration. Every key is validated; unknown keys raise an error.
+seed: 42
+n_jobs: -1
+models_dir: models
+reports_dir: reports
+
+# Models compared with time-aware cross-validation (see src/fraudlab/models.py).
+candidates:
+  - dummy
+  - logreg
+  - isolation_forest
+  - random_forest
+  - lgbm
+  - lgbm_weighted
+  - lgbm_smote
+
+data:
+  raw_path: data/raw/creditcard.csv
+  drop_duplicates: true
+
+split:
+  test_fraction: 0.20      # last 20% of time is the untouched test set
+  cv_splits: 4             # expanding-window folds on the development set
+  cv_gap_rows: 1000        # purge gap between train and validation (~10 min of traffic)
+
+cost:
+  review_cost: 5.0         # ASSUMPTION: cost of manually reviewing one alert (currency units)
+                           # A missed fraud costs the transaction amount.
+
+tuning:
+  n_trials: 30             # Optuna TPE trials for LightGBM
+
+evaluation:
+  bootstrap_samples: 500
+  alert_budgets: [0.001, 0.0025, 0.005]   # share of transactions analysts can review
+  cv_alert_rate: 0.0025

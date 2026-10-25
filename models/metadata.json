@@ -1,0 +1,140 @@
+{
+  "model": "lightgbm (tuned)",
+  "threshold": 0.31322092905289534,
+  "threshold_policy": "cost-optimal on out-of-fold scores (development period)",
+  "review_cost": 5.0,
+  "raw_features": [
+    "Time",
+    "V1",
+    "V2",
+    "V3",
+    "V4",
+    "V5",
+    "V6",
+    "V7",
+    "V8",
+    "V9",
+    "V10",
+    "V11",
+    "V12",
+    "V13",
+    "V14",
+    "V15",
+    "V16",
+    "V17",
+    "V18",
+    "V19",
+    "V20",
+    "V21",
+    "V22",
+    "V23",
+    "V24",
+    "V25",
+    "V26",
+    "V27",
+    "V28",
+    "Amount"
+  ],
+  "feature_names": [
+    "V1",
+    "V2",
+    "V3",
+    "V4",
+    "V5",
+    "V6",
+    "V7",
+    "V8",
+    "V9",
+    "V10",
+    "V11",
+    "V12",
+    "V13",
+    "V14",
+    "V15",
+    "V16",
+    "V17",
+    "V18",
+    "V19",
+    "V20",
+    "V21",
+    "V22",
+    "V23",
+    "V24",
+    "V25",
+    "V26",
+    "V27",
+    "V28",
+    "log_amount",
+    "hour_sin",
+    "hour_cos"
+  ],
+  "best_params": {
+    "n_estimators": 300,
+    "learning_rate": 0.022418379999653862,
+    "num_leaves": 11,
+    "min_child_samples": 25,
+    "subsample": 0.5638459490843514,
+    "colsample_bytree": 0.7513074826254332,
+    "reg_alpha": 0.009585842816410195,
+    "reg_lambda": 2.916055890375054,
+    "scale_pos_weight": 2.5426813181784205
+  },
+  "data_sha256": "33a178be65174943a07d1736acf5898f6c8e1fa80950dbbe598c17eda968ec59",
+  "training_window_seconds": [
+    0.0,
+    145234.0
+  ],
+  "test_metrics": {
+    "average_precision": 0.7725993373427551,
+    "roc_auc": 0.9898391712811786
+  },
+  "config": {
+    "seed": 42,
+    "n_jobs": -1,
+    "models_dir": "models",
+    "reports_dir": "reports",
+    "candidates": [
+      "dummy",
+      "logreg",
+      "isolation_forest",
+      "random_forest",
+      "lgbm",
+      "lgbm_weighted",
+      "lgbm_smote"
+    ],
+    "data": {
+      "raw_path": "data/raw/creditcard.csv",
+      "drop_duplicates": true
+    },
+    "split": {
+      "test_fraction": 0.2,
+      "cv_splits": 4,
+      "cv_gap_rows": 1000
+    },
+    "cost": {
+      "review_cost": 5.0
+    },
+    "tuning": {
+      "n_trials": 30
+    },
+    "evaluation": {
+      "bootstrap_samples": 500,
+      "alert_budgets": [
+        0.001,
+        0.0025,
+        0.005
+      ],
+      "cv_alert_rate": 0.0025
+    }
+  },
+  "trained_at": "2026-10-25T10:47:53+00:00",
+  "git_commit": null,
+  "environment": {
+    "python": "3.12.3",
+    "fraudlab": "1.0.0",
+    "scikit-learn": "1.8.0",
+    "lightgbm": "4.7.0",
+    "pandas": "3.0.2",
+    "numpy": "2.4.4"
+  }
+}

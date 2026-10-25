@@ -1,0 +1,20 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+build/
+dist/
+.pytest_cache/
+.ruff_cache/
+.ipynb_checkpoints/
+
+# Data (large; fetched with `make data`)
+data/raw/*
+!data/raw/.gitkeep
+data/processed/
+
+# Local artefacts
+.env
+.DS_Store
